@@ -4,12 +4,10 @@ import {
   Typography,
   Button,
   Box,
-  Avatar,
   Container,
   IconButton,
   Menu,
   MenuItem,
-  Tooltip,
   
 } from "@mui/material";
 import React from "react";
@@ -63,17 +61,11 @@ export function AppHeader() {
   const navigate = useNavigate();
 
   const [navAnchor, setNavAnchor] = React.useState<HTMLElement | null>(null);
-  const [userAnchor, setUserAnchor] = React.useState<HTMLElement | null>(null);
 
   const openNav = (e: React.MouseEvent<HTMLElement>) =>
     setNavAnchor(e.currentTarget);
 
   const closeNav = () => setNavAnchor(null);
-
-  const openUser = (e: React.MouseEvent<HTMLElement>) =>
-    setUserAnchor(e.currentTarget);
-
-  const closeUser = () => setUserAnchor(null);
 
   const handleNavigate = (path: string) => {
     closeNav();
@@ -94,7 +86,7 @@ export function AppHeader() {
               letterSpacing: ".3rem",
             }}
           >
-            LOGO
+            Interview Prep
           </Typography>
 
           {/* Mobile menu */}
@@ -128,7 +120,7 @@ export function AppHeader() {
               letterSpacing: ".3rem",
             }}
           >
-            LOGO
+            Interview Prep
           </Typography>
 
           {/* Desktop nav */}
@@ -140,28 +132,6 @@ export function AppHeader() {
             />
           </Box>
 
-          {/* User menu */}
-          <Box>
-            <Tooltip title="Account settings">
-              <IconButton onClick={openUser}>
-                <Avatar alt="User" />
-              </IconButton>
-            </Tooltip>
-
-            <Menu
-              anchorEl={userAnchor}
-              open={Boolean(userAnchor)}
-              onClose={closeUser}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
-              transformOrigin={{ vertical: "top", horizontal: "right" }}
-              sx={{ marginTop:"32px" }}
-            >
-              <MenuItem onClick={closeUser}>Profile</MenuItem>
-              <MenuItem onClick={closeUser}>Account</MenuItem>
-              <MenuItem onClick={closeUser}>Dashboard</MenuItem>
-              <MenuItem onClick={closeUser}>Logout</MenuItem>
-            </Menu>
-          </Box>
         </Toolbar>
       </Container>
     </AppBar>

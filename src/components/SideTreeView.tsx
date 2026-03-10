@@ -13,7 +13,8 @@ export interface SideTreeViewProps{
 
 export default function SideTreeView({selected,items,onChange}:SideTreeViewProps)  {
     
-    const categories = [".NET", "Design & Architecture", "SQL", "React", "Azure"];
+
+    const categories = ["Design & Architecture", "Azure", ".NET", "React", "SQL"];
     const [expandedItems, setExpandedItems] = useState<string[]>([selected.category ?? categories]);
 
     const handleExpandedItemsChange = (
@@ -35,7 +36,7 @@ export default function SideTreeView({selected,items,onChange}:SideTreeViewProps
     const DotnetTreeItems = () =>{
         return (
             <>
-                {dotnetItems.map((v)=> <TreeItem itemId={v.id} label={v.topic} onClick={()=>{handleClick(v.id)}}></TreeItem>)}
+                {dotnetItems.map((v)=> <TreeItem key={v.id} itemId={v.id} label={v.topic} onClick={()=>{handleClick(v.id)}}></TreeItem>)}
             </>
         )
     }
@@ -43,7 +44,7 @@ export default function SideTreeView({selected,items,onChange}:SideTreeViewProps
     const ArchitectureTreeItems = () =>{
         return (
             <>
-                {architectureItems.map((v)=> <TreeItem itemId={v.id} label={v.topic} onClick={()=>{handleClick(v.id)}}></TreeItem>)}
+                {architectureItems.map((v)=> <TreeItem key={v.id} itemId={v.id} label={v.topic} onClick={()=>{handleClick(v.id)}}></TreeItem>)}
             </>
         )
     }
@@ -52,7 +53,7 @@ export default function SideTreeView({selected,items,onChange}:SideTreeViewProps
     const SQLTreeItems = () =>{
         return (
             <>
-                {sqlItems.map((v)=> <TreeItem itemId={v.id} label={v.topic} onClick={()=>{handleClick(v.id)}}></TreeItem>)}
+                {sqlItems.map((v)=> <TreeItem key={v.id} itemId={v.id} label={v.topic} onClick={()=>{handleClick(v.id)}}></TreeItem>)}
             </>
         )
     }
@@ -61,7 +62,7 @@ export default function SideTreeView({selected,items,onChange}:SideTreeViewProps
     const ReactTreeItems = () =>{
         return (
             <>
-                {reactItems.map((v)=> <TreeItem itemId={v.id} label={v.topic} onClick={()=>{handleClick(v.id)}}></TreeItem>)}
+                {reactItems.map((v)=> <TreeItem key={v.id} itemId={v.id} label={v.topic} onClick={()=>{handleClick(v.id)}}></TreeItem>)}
             </>
         )
     }
@@ -70,7 +71,7 @@ export default function SideTreeView({selected,items,onChange}:SideTreeViewProps
     const AzureTreeItems = () =>{
         return (
             <>
-                {azureItems.map((v)=> <TreeItem itemId={v.id} label={v.topic} onClick={()=>{handleClick(v.id)}}></TreeItem>)}
+                {azureItems.map((v)=> <TreeItem key={v.id} itemId={v.id} label={v.topic} onClick={()=>{handleClick(v.id)}}></TreeItem>)}
             </>
         )
     }
