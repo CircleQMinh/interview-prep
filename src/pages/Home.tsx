@@ -5,6 +5,7 @@ import { KnowledgeMarkdown } from '../components/KnowledgeMarkdown';
 import { useEffect, useRef, useState } from 'react';
 import type { KnowledgeItem } from '../shared/knowledgeBase';
 import { useParams } from 'react-router-dom';
+import { baseRepoName } from "../shared/types";
 export default function Home() {
   const { "*": splat } = useParams();
   const initTopic = splat ? knowledgeItems.find(q=>q.id == (splat)) : knowledgeItems[0]
@@ -13,7 +14,7 @@ export default function Home() {
 
   const updateUrl = (item: KnowledgeItem) => {
     setCurrentTopic(item)
-    window.history.pushState({}, "", "/home/"+ item.id);
+    window.history.pushState({}, "", baseRepoName + "/home/"+ item.id);
   };
 
   useEffect(() => {
