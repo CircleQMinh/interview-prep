@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# Interview Prep Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A GitHub Pages website for reviewing important software engineering interview topics in a clean and simple format.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is an interview preparation website that helps users quickly browse and study key technical areas commonly asked in software engineering interviews.
 
-## React Compiler
+The site is focused on the following topic groups:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Design & Architecture
+- Azure
+- .NET
+- React
+- SQL
 
-## Expanding the ESLint configuration
+It is intended to be a lightweight knowledge hub for revision, self-study, and portfolio presentation.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Browse important interview topics by category
+- Clean and simple UI for reading technical notes
+- Organized content for quick review
+- Static site deployment with GitHub Pages
+- Built for easy future expansion
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Topic Categories
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Design & Architecture
+Covers common software design and system design concepts such as architecture styles, design principles, patterns, scalability, and maintainability.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Azure
+Covers important Microsoft Azure services and cloud concepts often discussed in backend and full-stack interviews.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### .NET
+Covers core .NET and C# topics, including application structure, dependency injection, APIs, Entity Framework, and backend development concepts.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### React
+Covers React fundamentals and practical frontend topics such as components, hooks, routing, state management, and UI patterns.
+
+### SQL
+Covers essential database topics such as joins, indexes, normalization, query writing, and relational database concepts.
+
+## Tech Stack
+
+- React
+- Vite
+- TypeScript
+- GitHub Pages
+- GitHub Actions
+
+## Purpose
+
+The goal of this project is to create a personal interview prep platform where users can:
+
+- review important technical concepts
+- organize study materials by topic
+- prepare for frontend, backend, and full-stack interviews
+- continuously expand their knowledge base over time
+
+## Deployment
+
+This site is deployed using GitHub Pages through GitHub Actions.
