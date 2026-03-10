@@ -51,3 +51,4 @@ export interface Meta {
   qrCode: string;
 }
 
+export const baseRepoName = '/interview-prep'
