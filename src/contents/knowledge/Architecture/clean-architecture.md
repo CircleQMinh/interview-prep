@@ -7,6 +7,7 @@ category: Design & Architecture
 ## Overview
 
 **Clean Architecture** is an architectural pattern that separates software into layers with clear responsibilities.
+**Clean Architecture**is an architectural approach/style that organizes software into layers and enforces inward dependency flow.
 
 Core rule:
 
@@ -94,13 +95,13 @@ Interviewers usually care about **why it helps**, not just the definition.
 A typical .NET Clean Architecture implementation looks like this:
 
 ```text
-API (Presentation)
-↓
-Application
-↓
-Domain
-↓
-Infrastructure
+        API
+         ↓
+    Application
+         ↓
+       Domain
+         ↑
+ Infrastructure
 ```
 
 ---
@@ -396,7 +397,7 @@ DTO ↔ Domain conversions occur at use-case boundaries.
 # 9. Where Should Transactions Be Handled?
 
 Transactions are typically handled at the **use-case boundary**.
-
+Transaction boundaries are usually controlled around the application use case, while the underlying transaction mechanism is implemented by infrastructure/persistence technology.
 Most common solutions:
 
 ```text

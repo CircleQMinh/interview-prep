@@ -310,12 +310,10 @@ DbContext lifetime issues exist
 Example:
 
 ```csharp
-public IEnumerable<User> GetUsers()
+public List<User> GetUsers()
 {
     using var context = new AppDbContext();
-
-    foreach(var user in context.Users)
-        yield return user;
+    return context.Users.ToList();
 }
 ```
 
@@ -335,6 +333,8 @@ Important insight:
 
 ```text
 yield enables lazy evaluation, not just memory optimization.
+yield does not make code faster by itself.
+Its benefit comes from lazy generation, reduced upfront work, and possible early termination.
 ```
 
 Memory improvements are only a **side effect**.
@@ -378,12 +378,14 @@ into database queries like SQL.
 # Quick Mental Model
 
 ```text
-IEnumerable → in memory
-IQueryable → database query
+IEnumerable → in memory, enumerate element by element in .NET
+IQueryable → database query, build provider-translated query
 List → concrete collection
 yield → lazy sequence generator
 ```
-
+In EF Core:
+- IQueryable lets EF build SQL and push filtering to the database
+- IEnumerable means further processing happens in .NET after data is being enumerated
 ---
 
 # Notes
@@ -408,7 +410,19 @@ Count
 First
 Any
 ```
+Important nuance:
 
+ToList / ToArray fully materialize the sequence
+
+First / Any / Count are terminal operators, so yes, they trigger execution
+
+But they do not all enumerate the same amount
+
+Any() may stop after the first match
+
+First() stops after first item/match
+
+Count() may enumerate all items unless optimized by the source/provider
 ---
 
 2. `yield return` compiles into a **state machine** behind the scenes.
@@ -431,8 +445,68 @@ if (value < 0)
     yield break;
 ```
 
+###  `IReadOnlyCollection<T>` and `IReadOnlyList<T>`
 
 
+
+```text
+IReadOnlyCollection<T>
+- Exposes Count
+- Does not allow modification through the interface
+
+IReadOnlyList<T>
+- Exposes Count and index access
+- Does not allow modification through the interface
+```
+
+Important interview note:
+
+```text
+Prefer returning the least powerful abstraction needed.
+For example:
+- IEnumerable<T> if caller only needs enumeration
+- IReadOnlyList<T> if caller needs indexing
+- List<T> only if caller truly needs mutation
+```
+
+###  `AsEnumerable()`, `ToList()`, and materialization boundary
+
+```csharp
+var query = context.Users.Where(x => x.IsActive);   // IQueryable
+var list = query.ToList();                          // executes SQL and materializes data
+var seq = query.AsEnumerable();                    // switches further operations to LINQ to Objects
+```
+
+Interview point:
+
+* `ToList()` executes and materializes
+* `AsEnumerable()` does not materialize by itself, but changes the remaining pipeline to in-memory LINQ
+
+###  `IAsyncEnumerable<T>`
+```text
+IAsyncEnumerable<T> represents an async stream of elements.
+It is consumed with await foreach.
+```
+
+Example:
+
+```csharp
+await foreach (var user in context.Users.AsAsyncEnumerable())
+{
+    Console.WriteLine(user.Name);
+}
+```
+
+Interview note:
+
+* useful for async streaming large result sets
+* different from `Task<List<T>>`, which loads everything before returning
+
+###  `yield return` restrictions / limitations
+Useful notes:
+
+* cannot use `yield return` in methods with `ref`, `in`, or `out` parameters
+* cannot use `yield return` inside `catch` or `finally`
 ---
 
 ## Notes
