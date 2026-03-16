@@ -228,7 +228,7 @@ Use Prototype when:
 ---
 
 ## Example
-
+This Clone implementation is a shallow copy because it uses MemberwiseClone().
 ```csharp
 public class Document
 {
@@ -487,6 +487,7 @@ Strategy interface:
 ```csharp
 public interface IDiscountStrategy
 {
+    bool Supports(OrderType type);
     decimal Calculate(Order order);
 }
 ```
@@ -496,18 +497,21 @@ Implementations:
 ```csharp
 public class RegularDiscountStrategy : IDiscountStrategy
 {
+    public bool Supports(OrderType type) => type == OrderType.Regular;
     public decimal Calculate(Order order)
         => order.Total * 0.05m;
 }
 
 public class PremiumDiscountStrategy : IDiscountStrategy
 {
+    public bool Supports(OrderType type) => type == OrderType.Premium;
     public decimal Calculate(Order order)
         => order.Total * 0.10m;
 }
 
 public class VipDiscountStrategy : IDiscountStrategy
 {
+    public bool Supports(OrderType type) => type == OrderType.Vip;
     public decimal Calculate(Order order)
         => order.Total * 0.20m;
 }
@@ -545,6 +549,30 @@ public class DiscountStrategyResolver
 | Chain of Responsibility | Pass request through handlers    |
 | Strategy                | Replace conditional logic        |
 
+
+###  How to identify each pattern in real life
+
+How to spot them:
+- Builder: fluent step-by-step creation
+- Factory: one place decides which implementation to create
+- Prototype: clone an existing object/template
+- Singleton: one shared instance for the whole app/process
+- Facade: one simplified entry point to a complex subsystem
+- Proxy: wrapper controlling access to the real object
+- Chain of Responsibility: request flows through multiple handlers
+- Strategy: interchangeable business rules/algorithms
+
+###  When not to use
+
+When not to use:
+- Builder: overkill for simple objects with few parameters
+- Factory: unnecessary when object creation is trivial
+- Prototype: risky if copy semantics are unclear
+- Singleton: avoid when it introduces hidden global state
+- Facade: avoid turning it into a god service
+- Proxy: unnecessary wrapper if no access-control/interception is needed
+- Chain of Responsibility: can become hard to debug if chain flow is unclear
+- Strategy: overkill for very small or stable conditional logic
 
 ---
 
