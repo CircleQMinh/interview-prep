@@ -7,7 +7,7 @@ category: Design & Architecture
 ## Overview
 
 **Clean Architecture** is an architectural pattern that separates software into layers with clear responsibilities.
-**Clean Architecture**is an architectural approach/style that organizes software into layers and enforces inward dependency flow.
+**Clean Architecture** is an architectural approach/style that organizes software into layers and enforces inward dependency flow.
 
 Core rule:
 
