@@ -48,6 +48,38 @@ It is important for:
 
 ---
 
+### Azure APIM Rate limiting
+
+Azure APIM rate limiting is one of its most useful gateway features. It lets you throttle requests before they hit your backend, so you can protect services from spikes, abuse, and noisy clients. APIM provides built-in policies for both rate limits and quotas, and they behave a little differently.
+A **rate limit** controls how many calls are allowed in a short rolling window, such as:
+
+* 10 calls per second
+* 100 calls per minute
+
+When the limit is exceeded, APIM returns **`429 Too Many Requests`**. APIM supports:
+
+* `rate-limit` for per-subscription limits
+* `rate-limit-by-key` for per-key limits such as user, IP, tenant, or app ID.
+
+### Quota
+
+A **quota** controls total usage over a longer period, such as:
+
+* 10,000 calls per day
+* 1 GB per month
+* lifetime call limits
+
+When a quota is exceeded, APIM returns **`403 Forbidden`** and includes a `Retry-After` header. APIM supports:
+
+* `quota` for per-subscription usage
+* `quota-by-key` for per-key usage. 
+
+A good mental model is:
+
+```text
+rate limit = spike protection
+quota = usage allowance over time
+```
 ### How do you implement rate limiting in ASP.NET Core?
 
 Modern ASP.NET Core (7+) includes built-in rate limiting middleware.

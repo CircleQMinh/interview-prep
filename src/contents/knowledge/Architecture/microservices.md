@@ -329,8 +329,8 @@ No shared database across services as the default design.
 
 ### 5. Smart endpoints, dumb pipes
 
-Smart endpoints = the services themselves contain the business rules and decision-making
-Dumb pipes = the communication layer should stay simple, mainly just moving requests/messages from one service to another
+* Smart endpoints = the services themselves contain the business rules and decision-making
+* Dumb pipes = the communication layer should stay simple, mainly just moving requests/messages from one service to another
 
 ### 6. Design for failure
 
