@@ -45,7 +45,8 @@ Characteristics:
 
 - Resource-based URLs
 - Proper use of HTTP methods
-- Stateless communication
+- Stateless communication(each request from client to server must contain all the information
+needed to understand and process that request.)
 - Standard HTTP status codes
 - Supports caching when appropriate
 
@@ -311,6 +312,15 @@ Most common in real-world APIs:
 ```
 
 ---
+### Typical setup in ASP.NET Core controllers
+
+For controller-based APIs, a common setup is:
+
+* install Asp.Versioning.Mvc
+* configure versioning in DI
+* decorate controllers/actions with version attributes
+* choose how clients specify the version
+
 
 #  Pagination, Filtering, Sorting
 

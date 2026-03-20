@@ -55,7 +55,7 @@ export default function Home() {
       </Box>
 
       {/* Content Area */}
-      <Box>
+      <Box data-testid="123">
         <Box
           sx={{
             flex: 1,

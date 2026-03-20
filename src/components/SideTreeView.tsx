@@ -2,7 +2,8 @@ import { Box } from "@mui/material";
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import type { KnowledgeItem } from "../shared/knowledgeBase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSimpleTreeViewApiRef } from "@mui/x-tree-view";
 
 
 export interface SideTreeViewProps{
@@ -13,6 +14,7 @@ export interface SideTreeViewProps{
 
 export default function SideTreeView({selected,items,onChange}:SideTreeViewProps)  {
     
+  const apiRef = useSimpleTreeViewApiRef();
 
     const categories = ["Design & Architecture", "Azure", ".NET", "React", "SQL"];
     const [expandedItems, setExpandedItems] = useState<string[]>([selected.category ?? categories]);
@@ -75,13 +77,15 @@ export default function SideTreeView({selected,items,onChange}:SideTreeViewProps
             </>
         )
     }
-
+  useEffect(() => {
+      apiRef.current!.getItemDOMElement(selected.id)?.scrollIntoView({ block: 'center' });
+  });
 
 
     return (
       <>
         <Box sx={{ minHeight: 352, minWidth: 250 }}>
-          <SimpleTreeView selectedItems={selected.id} 
+          <SimpleTreeView apiRef={apiRef} selectedItems={selected.id} 
           expandedItems={expandedItems}
           onExpandedItemsChange={handleExpandedItemsChange}
           sx={{

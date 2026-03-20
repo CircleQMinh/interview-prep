@@ -203,6 +203,86 @@ Cannot exceed 10 minutes.
 * Default: 30 minutes
 * Maximum: Practically configurable (no fixed hard limit)
 
+
+## Durable Functions
+
+Durable Functions is an Azure Functions extension for building stateful, reliable workflows in a serverless environment. It lets you coordinate activity functions using an orchestrator function, with built-in support for persistence, checkpoints, retries, timers, external events, and long-running workflows. It is useful for multi-step business processes, approvals, batch jobs, and any workflow that needs to survive restarts and resume later.
+
+Normal Azure Function:
+
+```text
+trigger → do work → finish
+```
+
+Durable Function:
+
+```text
+trigger → start workflow → run steps → wait → resume later → finish
+```
+
+That makes it useful for workflows like:
+
+* order processing
+* approval flows
+* file-processing pipelines
+* background jobs with retries
+* long-running multi-step business processes.
+
+## Core pieces of Durable Functions
+
+### 1. Orchestrator function
+
+This is the **workflow coordinator**.
+
+It decides:
+
+* what step runs first
+* what runs in parallel
+* what to do after a result comes back
+* when to wait
+* when to retry
+* when the workflow is done.
+
+Example idea:
+
+```text
+SubmitOrder
+  → validate order
+  → charge payment
+  → reserve inventory
+  → send confirmation
+```
+
+### 2. Activity function
+
+This is where the **actual work** happens.
+
+Activities are used for:
+
+* database access
+* HTTP calls
+* sending emails
+* CPU work
+* calling other services
+
+In practice:
+
+* orchestrator = workflow logic
+* activity = real side-effect work. 
+
+### 3. Durable entity
+
+This is a small **durable state object** with operations.
+
+You can use entities for things like:
+
+* counters
+* locks
+* shopping-cart-like state
+* per-user/per-item small state
+
+Entities manage explicit state and are different from orchestrators, which represent state through workflow progress. 
+
 ---
 
 # Azure Service Bus

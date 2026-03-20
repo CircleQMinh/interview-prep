@@ -5,7 +5,7 @@ export function AppFooter() {
     <Box
       component="footer"
       sx={{
-        py: 2,
+        py: 4,
         mt: 'auto',
         backgroundColor: (theme) => theme.palette.grey[100],
       }}
