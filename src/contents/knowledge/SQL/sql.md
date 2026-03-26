@@ -444,3 +444,40 @@ Unicode supports **all languages**, including English.
 | Indexed option | Yes (Indexed View) | No            |
 
 ---
+
+## Rank - ROW_NUMBER - DENSE_RANK
+Suppose salaries are:
+
+```text
+1000, 900, 900, 800
+```
+
+Then:
+
+* `ROW_NUMBER()` → `1, 2, 3, 4`
+* `RANK()` → `1, 2, 2, 4`
+* `DENSE_RANK()` → `1, 2, 2, 3`
+
+Think of them like this:
+
+* `ROW_NUMBER()` = every row gets its own seat number
+* `RANK()` = tied rows share a place, next place is skipped
+* `DENSE_RANK()` = tied rows share a place, no places skipped
+
+Use `ROW_NUMBER()` when:
+
+* you need exactly one row per position
+* ties should still be split
+* you want “latest one”, “first one”, “top 1 per group”
+
+Use `RANK()` when:
+
+* ties should have the same rank
+* skipped rank numbers are acceptable
+* you want true ranking positions
+
+Use `DENSE_RANK()` when:
+
+* ties should have the same rank
+* you do not want gaps
+* you care about distinct ordered values
