@@ -213,7 +213,9 @@ public class ServiceB
 
 ## Lifetime Rule of Thumb
 In ASP.NET Core DI, most lifetime combinations resolve without error except when a Singleton depends on a Scoped service.
-
+---
+* Singleton into Scoped → allowed
+* Scoped into Singleton → not allowed
 
 | Injected Into ↓      | Singleton | Scoped | Transient |
 | -------------------- | --------- | ------ | --------- |

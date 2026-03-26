@@ -329,8 +329,18 @@ In SQL Server:
 
 Example database column:
 
-```sql
-RowVersion rowversion
+```c#
+using System.ComponentModel.DataAnnotations;
+
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = default!;
+    public decimal Price { get; set; }
+
+    [Timestamp]
+    public byte[] RowVersion { get; set; } = default!;
+}
 ````
 
 ---

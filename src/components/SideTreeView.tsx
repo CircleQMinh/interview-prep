@@ -17,7 +17,7 @@ export default function SideTreeView({selected,items,onChange}:SideTreeViewProps
   const apiRef = useSimpleTreeViewApiRef();
 
     const categories = ["Design & Architecture", "Azure", ".NET", "React", "SQL"];
-    const [expandedItems, setExpandedItems] = useState<string[]>([selected.category ?? categories]);
+    const [expandedItems, setExpandedItems] = useState<string[]>(categories);
 
     const handleExpandedItemsChange = (
       _: React.SyntheticEvent | null,
@@ -98,7 +98,7 @@ export default function SideTreeView({selected,items,onChange}:SideTreeViewProps
             }}>
             {categories.map((v,i) => {
               return (
-                <TreeItem key={i} itemId={v} label={v} >
+                <TreeItem key={i} itemId={v} label={v}  >
                   {v === categories[0] && <DotnetTreeItems/>}
                   {v === categories[1] && <ArchitectureTreeItems/>}
                   {v === categories[2] && <SQLTreeItems/>}

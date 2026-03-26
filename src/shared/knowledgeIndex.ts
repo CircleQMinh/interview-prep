@@ -5,6 +5,7 @@ const modules = import.meta.glob('../contents/knowledge/**/*.md', {
   as: 'raw',
   eager: true,
 });
+// console.log(modules);
 
 export const knowledgeItems = Object.entries(modules).map(([_, raw]) => {
   const { frontmatter, content } = parseMarkdown(raw as string);
