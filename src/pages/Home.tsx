@@ -18,7 +18,7 @@ export default function Home() {
 
   const updateUrl = (item: KnowledgeItem) => {
     setCurrentTopic(item);
-    window.history.pushState({}, "", baseRepoName + "/home/" + item.id);
+    window.history.pushState({}, "", baseRepoName + "/" + item.id);
   };
 
   const nextTopic = () =>{

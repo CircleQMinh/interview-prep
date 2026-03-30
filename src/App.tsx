@@ -12,8 +12,7 @@ function App() {
     <>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path={`${base}/`} element={<Home />} />
-          <Route path={`${base}/home/*`} element={<Home />} />
+          <Route path={`${base}/*`} element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
